@@ -9,9 +9,11 @@ extends CanvasLayer
 @onready var events_container = $MainContainer/EventsContainer
 
 var main_game: Node
+var event_system: Node
 
 func _ready():
 	main_game = get_node("/root/Main")
+	event_system = main_game.get_node("EventSystem")
 	update_ui()
 
 func _process(_delta):
@@ -26,7 +28,7 @@ func update_ui():
 	
 	# Update project info
 	if main_game.current_project:
-		current_project_label.text = "Current Project: %s" % main_game.current_project.name
+		current_project_label.text = "Current Project: %s" % main_game.current_project.project_name
 		progress_bar.value = main_game.current_project.progress * 100
 	else:
 		current_project_label.text = "Current Project: None"
@@ -42,8 +44,9 @@ func update_events():
 			child.queue_free()
 	
 	# Add new event labels
-	var event_system = main_game.get_node("EventSystem")
-	for event in event_system.get_active_events():
-		var event_label = Label.new()
-		event_label.text = "%s (%.1fs)" % [event.name, event.duration]
-		events_container.add_child(event_label) 
+	if event_system and event_system.has_method("get_active_events"):
+		for event in event_system.get_active_events():
+			var event_label = Label.new()
+			event_label.text = "%s (%.1fs)" % [event.name, event.duration]
+			# event_label.theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+			events_container.add_child(event_label) 

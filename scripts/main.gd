@@ -40,7 +40,7 @@ func update_game_state(delta):
 
 func start_project(project_data):
 	current_project = project_data
-	print("Started new project: ", project_data.name)
+	print("Started new project: ", project_data.project_name)
 
 func complete_project():
 	if current_project:

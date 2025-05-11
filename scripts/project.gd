@@ -2,7 +2,7 @@ extends Node
 
 class_name Project
 
-var name: String
+var project_name: String
 var description: String
 var deadline: float
 var reward: float
@@ -13,7 +13,7 @@ var progress: float = 0.0
 var time_spent: float = 0.0
 
 func _init(project_data: Dictionary):
-	name = project_data.get("name", "Unnamed Project")
+	project_name = project_data.get("name", "Unnamed Project")
 	description = project_data.get("description", "")
 	deadline = project_data.get("deadline", 0.0)
 	reward = project_data.get("reward", 0.0)
