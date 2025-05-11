@@ -1,0 +1,90 @@
+[gd_scene load_steps=5 format=3 uid="uid://cam30l78q1l72"]
+
+[ext_resource type="Script" path="res://scripts/office.gd" id="1_2u4vx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(200, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2"]
+size = Vector2(100, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3"]
+size = Vector2(150, 200)
+
+[node name="Office" type="Node2D"]
+script = ExtResource("1_2u4vx")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Desk" type="Area2D" parent="."]
+position = Vector2(640, 360)
+monitoring = true
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Desk"]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Desk"]
+
+[node name="CoffeeMachine" type="Area2D" parent="."]
+position = Vector2(1000, 200)
+monitoring = true
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoffeeMachine"]
+shape = SubResource("RectangleShape2D_2")
+
+[node name="Sprite2D" type="Sprite2D" parent="CoffeeMachine"]
+
+[node name="TaskBoard" type="Area2D" parent="."]
+position = Vector2(200, 200)
+monitoring = true
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TaskBoard"]
+shape = SubResource("RectangleShape2D_3")
+
+[node name="Sprite2D" type="Sprite2D" parent="TaskBoard"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="StatsContainer" type="HBoxContainer" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -400.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 60.0
+grow_horizontal = 0
+theme_override_constants/separation = 20
+
+[node name="MoneyLabel" type="Label" parent="UI/StatsContainer"]
+layout_mode = 2
+text = "Money: $1000"
+
+[node name="EnergyLabel" type="Label" parent="UI/StatsContainer"]
+layout_mode = 2
+text = "Energy: 100%"
+
+[node name="ChaosLabel" type="Label" parent="UI/StatsContainer"]
+layout_mode = 2
+text = "Chaos: 0%"
+
+[node name="Tooltip" type="Label" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 200.0
+offset_right = 100.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Click objects to interact"
+horizontal_alignment = 1 

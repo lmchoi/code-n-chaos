@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Code & Chaos"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="uid://cdumgwn262frx"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+PlayerSingleton="*res://scripts/player_singleton.gd"
+TaskManagerSingleton="*res://scripts/task_manager_singleton.gd"
 
 [display]
 
