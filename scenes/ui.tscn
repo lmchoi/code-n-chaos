@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8q6v0j6y5n3q"]
+
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_3u4vx"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_3u4vx")
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="StatsContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MoneyLabel" type="Label" parent="MainContainer/StatsContainer"]
+layout_mode = 2
+text = "Money: $1000"
+
+[node name="UsersLabel" type="Label" parent="MainContainer/StatsContainer"]
+layout_mode = 2
+text = "Users: 0"
+
+[node name="ReputationLabel" type="Label" parent="MainContainer/StatsContainer"]
+layout_mode = 2
+text = "Reputation: 0"
+
+[node name="ChaosLabel" type="Label" parent="MainContainer/StatsContainer"]
+layout_mode = 2
+text = "Chaos: 0%"
+
+[node name="ProjectContainer" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="CurrentProjectLabel" type="Label" parent="MainContainer/ProjectContainer"]
+layout_mode = 2
+text = "Current Project: None"
+
+[node name="ProgressBar" type="ProgressBar" parent="MainContainer/ProjectContainer"]
+layout_mode = 2
+value = 50.0
+
+[node name="EventsContainer" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="EventsLabel" type="Label" parent="MainContainer/EventsContainer"]
+layout_mode = 2
+text = "Active Events:" 
