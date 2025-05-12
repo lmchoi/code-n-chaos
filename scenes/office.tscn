@@ -1,15 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cam30l78q1l72"]
+[gd_scene load_steps=5 format=3 uid="uid://cx3khjfwmhdw2"]
 
-[ext_resource type="Script" path="res://scripts/office.gd" id="1_2u4vx"]
+[ext_resource type="Script" uid="uid://cs6oiv8yujn3c" path="res://scripts/office.gd" id="1_2u4vx"]
+[ext_resource type="Texture2D" uid="uid://dbiye66tjgvl1" path="res://assets/art/task_board.png" id="2_n0wcf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(200, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2"]
 size = Vector2(100, 150)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3"]
-size = Vector2(150, 200)
 
 [node name="Office" type="Node2D"]
 script = ExtResource("1_2u4vx")
@@ -21,8 +19,6 @@ color = Color(0.2, 0.2, 0.2, 1)
 
 [node name="Desk" type="Area2D" parent="."]
 position = Vector2(640, 360)
-monitoring = true
-monitorable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Desk"]
 shape = SubResource("RectangleShape2D_1")
@@ -31,23 +27,19 @@ shape = SubResource("RectangleShape2D_1")
 
 [node name="CoffeeMachine" type="Area2D" parent="."]
 position = Vector2(1000, 200)
-monitoring = true
-monitorable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CoffeeMachine"]
 shape = SubResource("RectangleShape2D_2")
 
 [node name="Sprite2D" type="Sprite2D" parent="CoffeeMachine"]
 
-[node name="TaskBoard" type="Area2D" parent="."]
-position = Vector2(200, 200)
-monitoring = true
-monitorable = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TaskBoard"]
-shape = SubResource("RectangleShape2D_3")
-
-[node name="Sprite2D" type="Sprite2D" parent="TaskBoard"]
+[node name="TaskBoard" type="TextureButton" parent="."]
+offset_left = 63.0
+offset_top = 41.0
+offset_right = 477.0
+offset_bottom = 378.0
+texture_normal = ExtResource("2_n0wcf")
+stretch_mode = 5
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -87,4 +79,14 @@ offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Click objects to interact"
-horizontal_alignment = 1 
+horizontal_alignment = 1
+
+[connection signal="input_event" from="Desk" to="." method="_on_desk_input_event"]
+[connection signal="mouse_entered" from="Desk" to="." method="_on_desk_mouse_entered"]
+[connection signal="mouse_exited" from="Desk" to="." method="_on_desk_mouse_exited"]
+[connection signal="input_event" from="CoffeeMachine" to="." method="_on_coffee_machine_input_event"]
+[connection signal="mouse_entered" from="CoffeeMachine" to="." method="_on_coffee_machine_mouse_entered"]
+[connection signal="mouse_exited" from="CoffeeMachine" to="." method="_on_coffee_machine_mouse_exited"]
+[connection signal="mouse_entered" from="TaskBoard" to="." method="_on_task_board_mouse_entered"]
+[connection signal="mouse_exited" from="TaskBoard" to="." method="_on_task_board_mouse_exited"]
+[connection signal="pressed" from="TaskBoard" to="." method="_on_task_board_pressed"]

@@ -20,10 +20,9 @@ func _ready():
 		return
 	print("Player node found")
 	
-	# Connect signals
-	desk.connect("input_event", Callable(self, "_on_desk_input_event"))
-	coffee_machine.connect("input_event", Callable(self, "_on_coffee_machine_input_event"))
-	task_board.connect("input_event", Callable(self, "_on_task_board_input_event"))
+	# Debug print node states
+	print("Task board position: ", task_board.position)
+	print("Task board size: ", task_board.size)
 	
 	# Connect player signals
 	player_node.connect("money_changed", Callable(self, "_on_money_changed"))
@@ -46,6 +45,7 @@ func update_ui():
 	chaos_label.text = "Chaos: %.0f%%" % player_node.chaos
 
 func _on_desk_input_event(_viewport, event, _shape_idx):
+	print("Desk input event: ", event)  # Debug print
 	if event is InputEventMouseButton and event.pressed:
 		if player_node == null:
 			return
@@ -56,6 +56,7 @@ func _on_desk_input_event(_viewport, event, _shape_idx):
 			show_tooltip("No active task. Visit the task board first!")
 
 func _on_coffee_machine_input_event(_viewport, event, _shape_idx):
+	print("Coffee machine input event: ", event)  # Debug print
 	if event is InputEventMouseButton and event.pressed:
 		if player_node == null:
 			return
@@ -66,12 +67,43 @@ func _on_coffee_machine_input_event(_viewport, event, _shape_idx):
 		else:
 			show_tooltip("Not enough money for coffee!")
 
-func _on_task_board_input_event(_viewport, event, _shape_idx):
-	if event is InputEventMouseButton and event.pressed:
-		# Show task board UI
-		get_tree().change_scene_to_file("res://scenes/task_board.tscn")
+func _on_task_board_pressed():
+	print("Task board pressed")  # Debug print
+	print("Attempting to change scene to task board")  # Debug print
+	# Show task board UI
+	var error = get_tree().change_scene_to_file("res://scenes/task_board.tscn")
+	if error != OK:
+		push_error("Failed to change scene to task board. Error code: " + str(error))
+	else:
+		print("Scene change initiated successfully")  # Debug print
+
+# Mouse hover handlers
+func _on_desk_mouse_entered():
+	print("Mouse entered desk")  # Debug print
+	show_tooltip("Click to work on current task")
+
+func _on_desk_mouse_exited():
+	print("Mouse exited desk")  # Debug print
+	tooltip.visible = false
+
+func _on_coffee_machine_mouse_entered():
+	print("Mouse entered coffee machine")  # Debug print
+	show_tooltip("Click to buy coffee ($2)")
+
+func _on_coffee_machine_mouse_exited():
+	print("Mouse exited coffee machine")  # Debug print
+	tooltip.visible = false
+
+func _on_task_board_mouse_entered():
+	print("Mouse entered task board")  # Debug print
+	show_tooltip("Click to view available tasks")
+
+func _on_task_board_mouse_exited():
+	print("Mouse exited task board")  # Debug print
+	tooltip.visible = false
 
 func show_tooltip(text: String):
+	print("Showing tooltip: ", text)  # Debug print
 	tooltip.text = text
 	tooltip.visible = true
 
