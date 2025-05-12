@@ -81,6 +81,9 @@ grow_vertical = 2
 text = "Click objects to interact"
 horizontal_alignment = 1
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
 [connection signal="input_event" from="Desk" to="." method="_on_desk_input_event"]
 [connection signal="mouse_entered" from="Desk" to="." method="_on_desk_mouse_entered"]
 [connection signal="mouse_exited" from="Desk" to="." method="_on_desk_mouse_exited"]

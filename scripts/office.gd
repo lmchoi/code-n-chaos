@@ -71,11 +71,9 @@ func _on_task_board_pressed():
 	print("Task board pressed")  # Debug print
 	print("Attempting to change scene to task board")  # Debug print
 	# Show task board UI
-	var error = get_tree().change_scene_to_file("res://scenes/task_board.tscn")
-	if error != OK:
-		push_error("Failed to change scene to task board. Error code: " + str(error))
-	else:
-		print("Scene change initiated successfully")  # Debug print
+	var task_board = preload("res://scenes/task_board.tscn").instantiate()
+	$CanvasLayer.add_child(task_board)
+	task_board.position = Vector2(100, 100)
 
 # Mouse hover handlers
 func _on_desk_mouse_entered():

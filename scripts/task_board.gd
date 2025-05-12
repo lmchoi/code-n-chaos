@@ -19,11 +19,10 @@ func _ready():
 	
 	print("Got Player and TaskManager nodes")  # Debug print
 	
-	# Connect back button
-	back_button.connect("pressed", Callable(self, "_on_back_button_pressed"))
-	
 	# Populate task list
 	update_task_list()
+	
+	set_process_input(true)
 
 func update_task_list():
 	# Clear existing tasks
@@ -60,4 +59,15 @@ func _on_task_selected(index: int):
 
 func _on_back_button_pressed():
 	print("Back button pressed")  # Debug print
-	get_tree().change_scene_to_file("res://scenes/office.tscn") 
+	hide()
+	
+
+func _input(event):
+	# Close on ESC
+	if event.is_action_pressed("ui_cancel"):
+		queue_free()
+
+func _on_gui_input(event):
+	# Close when clicking outside (if root is a Panel)
+	if event is InputEventMouseButton and event.pressed:
+		queue_free()	
